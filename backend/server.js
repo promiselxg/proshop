@@ -5,6 +5,8 @@ import { notFound, errorHandler } from './middleware/errorMiddleware.js'
 import connectDB from './config/db.js'
 
 import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+
 dotenv.config()
 
 // Connect to Database
@@ -13,12 +15,15 @@ connectDB()
 //  Initialize Express Server
 const app = express()
 
+app.use(express.json())
+
 app.get('/', (req, res) => {
   res.send('API is Running...')
 })
 
 //  Moute Routes
 app.use('/api/products', productRoutes)
+app.use('/api/users', userRoutes)
 
 //  Error Handler - File not Found
 app.use(notFound)
