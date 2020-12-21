@@ -5,7 +5,12 @@ import {
   productListReducer,
   productDetailsReducer,
 } from './reducers/productReducers'
-import { userLoginReducer, userRegisteReducer } from './reducers/userReducers'
+import {
+  userLoginReducer,
+  userRegisteReducer,
+  userDetailsReducer,
+  userUpdateProfileReducer,
+} from './reducers/userReducers'
 import { cartReducer } from './reducers/cartReducers'
 
 const reducer = combineReducers({
@@ -14,6 +19,8 @@ const reducer = combineReducers({
   cart: cartReducer,
   userLogin: userLoginReducer,
   userRegister: userRegisteReducer,
+  userDetails: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
 })
 
 // check if cart item is already in local storage
