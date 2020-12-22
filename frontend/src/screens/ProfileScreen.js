@@ -3,6 +3,7 @@ import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
+import Loader from '../components/Loader'
 
 const ProfileScreen = ({ location, history }) => {
   const [name, setName] = useState('')
@@ -50,6 +51,7 @@ const ProfileScreen = ({ location, history }) => {
     <Row>
       <Col md={3}>
         <h2>User Profile</h2>
+        {loading && <Loader />}
         {error && <Message variant='danger'>{error}</Message>}
         {message && <Message variant='danger'>{message}</Message>}
         {success && <Message variant='success'>Profile Updated</Message>}
@@ -97,15 +99,9 @@ const ProfileScreen = ({ location, history }) => {
             ></Form.Control>
           </Form.Group>
 
-          {loading ? (
-            <Button type='submit' variant='primary' disabled>
-              Please Wait...
-            </Button>
-          ) : (
-            <Button type='submit' variant='primary'>
-              Update
-            </Button>
-          )}
+          <Button type='submit' variant='primary'>
+            Update
+          </Button>
         </Form>
       </Col>
       <Col md={9}></Col>

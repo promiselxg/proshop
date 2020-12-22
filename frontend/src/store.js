@@ -33,8 +33,17 @@ const userInfoFromStorage = localStorage.getItem('userInfo')
   ? JSON.parse(localStorage.getItem('userInfo'))
   : null
 
+// check if shipping address exist in local storage else add an empty object {}
+const shippingAddressFromStorage = localStorage.getItem('chippingAddress')
+  ? JSON.parse(localStorage.getItem('chippingAddress'))
+  : {}
+
+// this section loads files from local storage
 const initialState = {
-  cart: { cartItems: cartItemsFromStorage },
+  cart: {
+    cartItems: cartItemsFromStorage,
+    shippingAddress: shippingAddressFromStorage,
+  },
   userLogin: { userInfo: userInfoFromStorage },
 }
 
