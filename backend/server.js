@@ -27,6 +27,10 @@ app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/orders', orderRoutes)
 
+// PAYPAL CLIENT ID
+app.get('/api/config/paypal', (req, res) =>
+  res.send(process.env.PAYPAL_CLIENT_ID)
+)
 //  Error Handler - File not Found
 app.use(notFound)
 //  Error Handler
