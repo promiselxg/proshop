@@ -5,9 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { listUsers, deleteUser } from '../actions/userActions'
-import { ToastContainer, toast } from 'react-toastify'
-
-import 'react-toastify/dist/ReactToastify.css'
+import Swal from 'sweetalert2'
 
 const UserListScreen = ({ history }) => {
   const dispatch = useDispatch()
@@ -30,34 +28,23 @@ const UserListScreen = ({ history }) => {
   }, [dispatch, history, userInfo, successDelete])
 
   const deleteHandler = (id) => {
-    dispatch(deleteUser(id))
-    toast.success('User Removed Successfully', {
-      position: 'top-center',
-      autoClose: 5000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
+    Swal.fire({
+      title: 'Please Confirm!',
+      text: 'Do you want to remove this user',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      confirmButtonText: 'Delete',
+    }).then((result) => {
+      if (result.value) {
+        dispatch(deleteUser(id))
+      }
     })
   }
 
   return (
     <>
       <h1>Users</h1>
-      {successDelete && (
-        <ToastContainer
-          position='top-center'
-          autoClose={5000}
-          hideProgressBar={false}
-          newestOnTop={false}
-          closeOnClick
-          rtl={false}
-          pauseOnFocusLoss
-          draggable
-          pauseOnHover
-        />
-      )}
       {loading ? (
         <Loader />
       ) : error ? (
