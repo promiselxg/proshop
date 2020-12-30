@@ -30,7 +30,7 @@ const UserListScreen = ({ history }) => {
   const deleteHandler = (id) => {
     Swal.fire({
       title: 'Please Confirm!',
-      text: 'Do you want to remove this user',
+      text: 'Do you want to remove this user?',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#d33',
@@ -66,7 +66,7 @@ const UserListScreen = ({ history }) => {
                 <td>{user._id}</td>
                 <td>{user.name}</td>
                 <td>
-                  <a href={`mailto:${user.email}`}>{user.emil}</a>
+                  <a href={`mailto:${user.email}`}>{user.email}</a>
                 </td>
                 <td>
                   {user.isAdmin ? (
@@ -75,8 +75,9 @@ const UserListScreen = ({ history }) => {
                     <i className='fas fa-times' style={{ color: 'red' }}></i>
                   )}
                 </td>
+
                 <td>
-                  <LinkContainer to={`/user/${user._id}/edit`}>
+                  <LinkContainer to={`/admin/user/${user._id}/edit`}>
                     <Button variant='light' className='btn-sm'>
                       <i className='fas fa-edit'></i>
                     </Button>
