@@ -23,4 +23,20 @@ const getProductById = AsyncHandler(async (req, res) => {
   }
 })
 
-export { getProducts, getProductById }
+//  @desc   Delete Product
+//  @route  DELETE api/products/:id
+//  @access Private/Admin
+const deleteProduct = AsyncHandler(async (req, res) => {
+  const product = await Product.findById(req.params.id)
+
+  // req.user._id === product.user._id (if u want admin to only delete product created by Him)
+  if (product) {
+    await product.remove()
+    res.json({ message: 'Product Removed' })
+  } else {
+    res.status(404)
+    throw new Error('Product not Found')
+  }
+})
+
+export { getProducts, getProductById, deleteProduct }
