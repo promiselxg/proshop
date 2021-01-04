@@ -34,7 +34,6 @@ const upload = multer({
     checkFileType(file, cb)
   },
 })
-
 router.post('/', upload.single('image'), (req, res) => {
   res.send(`/${req.file.path}`)
 })
