@@ -24,10 +24,6 @@ if (process.env.NODE_ENV == 'development') {
 }
 app.use(express.json())
 
-app.get('/', (req, res) => {
-  res.send('API is Running...')
-})
-
 //  Moute Routes
 app.use('/api/products', productRoutes)
 app.use('/api/users', userRoutes)
@@ -42,6 +38,19 @@ app.get('/api/config/paypal', (req, res) =>
 // make uploads folder static
 const __dirname = path.resolve()
 app.use('/uploads', express.static(path.join(__dirname, '/uploads')))
+
+//  check if we are in production mode for deployment
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '/frontend/build')))
+  //  get any route that is not in our API
+  app.get('*', (req, res) =>
+    res.sendFile(path.resolve(__dirname, 'frontend', 'build', 'index.html'))
+  )
+} else {
+  app.get('/', (req, res) => {
+    res.send('API is Running...')
+  })
+}
 //  Error Handler - File not Found
 app.use(notFound)
 //  Error Handler
