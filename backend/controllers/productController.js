@@ -6,7 +6,7 @@ import Product from '../models/productModel.js'
 //  @access Public
 const getProducts = AsyncHandler(async (req, res) => {
   //  Pagination
-  const pageSize = 2
+  const pageSize = 4
   const page = Number(req.query.pageNumber) || 1
 
   const keyword = req.query.keyword
